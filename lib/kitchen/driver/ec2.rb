@@ -56,6 +56,7 @@ module Kitchen
       required_config :aws_secret_access_key
       required_config :aws_ssh_key_id
       required_config :image_id
+      required_config :iam_instance_profile_name
 
       def create(state)
         server = create_server
@@ -111,6 +112,7 @@ module Kitchen
           :image_id           => config[:image_id],
           :key_name           => config[:aws_ssh_key_id],
           :subnet_id          => config[:subnet_id],
+          :iam_instance_profile_name => config[:iam_instance_profile_name]
         )
       end
 
@@ -123,6 +125,7 @@ module Kitchen
         debug("ec2:tags '#{config[:tags]}'")
         debug("ec2:key_name '#{config[:aws_ssh_key_id]}'")
         debug("ec2:subnet_id '#{config[:subnet_id]}'")
+        debug("ec2:iam_instance_profile_name '#{config[:iam_instance_profile_name]}'")
       end
 
       def amis
